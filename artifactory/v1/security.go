@@ -522,13 +522,13 @@ func (s *SecurityService) ListGroups(ctx context.Context) (*[]GroupDetails, *htt
 
 // application/vnd.org.jfrog.artifactory.security.Group+json
 type Group struct {
-	Name            *string `json:"name,omitempty"`            // Optional element in create/replace queries
-	Description     *string `json:"description,omitempty"`     // Optional element in create/replace queries
-	AutoJoin        *bool   `json:"autoJoin,omitempty"`        // Optional element in create/replace queries; default: false (must be false if adminPrivileges is true)
-	AdminPrivileges *bool   `json:"adminPrivileges,omitempty"` // Optional element in create/replace queries; default: false
-	Realm           *string `json:"realm,omitempty"`           // Optional element in create/replace queries
-	RealmAttributes *string `json:"realmAttributes,omitempty"` // Optional element in create/replace queries
-	UserNames 	*[]string `json:"userNames,omitempty"` 	   // Optional element in create/replace queries
+	Name            *string   `json:"name,omitempty"`            // Optional element in create/replace queries
+	Description     *string   `json:"description,omitempty"`     // Optional element in create/replace queries
+	AutoJoin        *bool     `json:"autoJoin,omitempty"`        // Optional element in create/replace queries; default: false (must be false if adminPrivileges is true)
+	AdminPrivileges *bool     `json:"adminPrivileges,omitempty"` // Optional element in create/replace queries; default: false
+	Realm           *string   `json:"realm,omitempty"`           // Optional element in create/replace queries
+	RealmAttributes *string   `json:"realmAttributes,omitempty"` // Optional element in create/replace queries
+	UserNames       *[]string `json:"userNames,omitempty"`       // Optional element in create/replace queries
 
 }
 

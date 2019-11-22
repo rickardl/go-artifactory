@@ -528,6 +528,8 @@ type Group struct {
 	AdminPrivileges *bool   `json:"adminPrivileges,omitempty"` // Optional element in create/replace queries; default: false
 	Realm           *string `json:"realm,omitempty"`           // Optional element in create/replace queries
 	RealmAttributes *string `json:"realmAttributes,omitempty"` // Optional element in create/replace queries
+	UserNames 	[]*string `json:"userNames,omitempty"` 	   // Optional element in create/replace queries
+
 }
 
 func (r Group) String() string {

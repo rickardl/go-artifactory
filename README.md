@@ -5,7 +5,7 @@ go-artifactory is a Go client library for accessing the [Artifactory API](https:
 
 ## V2 Breaking Changes ##
 Due to the release of the new artifactory api this library has been significantly reworked. The import path has changed
-to github.com/atlassian/go-artifactory/pkg/artifactory to github.com/atlassian/go-artifactory/artifactory. 
+to github.com/rickardl/go-artifactory/pkg/artifactory to github.com/rickardl/go-artifactory/artifactory.
 
 Services can now be accessed by including their API version i.e rt.V1.Security instead of rt.Security
 
@@ -16,7 +16,7 @@ Services can now be accessed by including their API version i.e rt.V1.Security i
 
 ## Usage ##
 ```go
-import "github.com/atlassian/go-artifactory/artifactory"
+import "github.com/rickardl/go-artifactory/artifactory"
 ```
 
 Construct a new Artifactory client, then use the various services on the client to
@@ -52,7 +52,7 @@ can be used as a starting point.
 
 The go-artifactory library does not directly handle authentication. Instead, when
 creating a new client, pass an `http.Client` that can handle authentication for
-you. 
+you.
 
 For API methods that require HTTP Basic Authentication, use the BasicAuthTransport or TokenTransport
 
@@ -60,7 +60,7 @@ For API methods that require HTTP Basic Authentication, use the BasicAuthTranspo
 package main
 
 import (
-	"github.com/atlassian/go-artifactory/pkg/artifactory"
+	"github.com/rickardl/go-artifactory/pkg/artifactory"
 	"fmt"
 	"context"
 )
@@ -70,7 +70,7 @@ func main() {
 		Username: "<YOUR_USERNAME>",
 		Password: "<YOUR_PASSWORD>",
 	}
-	
+
 	client, err := artifactory.NewClient("https://localhost/artifactory", tp.Client())
 	if err != nil {
 		fmt.Println(err.Error())
@@ -114,7 +114,7 @@ straightforward.
 In general, go-artifactory follows [semver](https://semver.org/) as closely as we
 can for tagging releases of the package. For self-contained libraries, the
 application of semantic versioning is relatively straightforward and generally
-understood. But because go-artifactory is a client library for the Artifactory API 
+understood. But because go-artifactory is a client library for the Artifactory API
 we've adopted the following versioning policy:
 
 * We increment the **major version** with any incompatible change to
@@ -128,7 +128,7 @@ Generally methods will be annotated with a since version.
 
 ## Reporting issues ##
 
-We believe in open contributions and the power of a strong development community. Please read our 
+We believe in open contributions and the power of a strong development community. Please read our
 [Contributing guidelines](.github/CONTRIBUTING.md) on how to contribute back and report issues to go-artifactory.
 
 ## Contributors ##

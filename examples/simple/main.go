@@ -4,9 +4,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/atlassian/go-artifactory/v2/artifactory"
-	"github.com/atlassian/go-artifactory/v2/artifactory/transport"
-	"github.com/atlassian/go-artifactory/v2/artifactory/v1"
+	"github.com/rickardl/go-artifactory/v2/artifactory"
+	"github.com/rickardl/go-artifactory/v2/artifactory/transport"
+	"github.com/rickardl/go-artifactory/v2/artifactory/v1"
 	"os"
 )
 

@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/atlassian/go-artifactory/v2/artifactory/client"
+	"github.com/rickardl/go-artifactory/v2/artifactory/client"
 	"net/http"
 )
 

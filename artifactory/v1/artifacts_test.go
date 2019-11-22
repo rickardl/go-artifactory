@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/stretchr/testify/assert"
-	"github.com/atlassian/go-artifactory/v2/artifactory/client"
+	"github.com/rickardl/go-artifactory/v2/artifactory/client"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -18,7 +18,7 @@ func TestFileInfo(t *testing.T) {
 
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
-    	
+
 		dummyRes := `{
   "repo" : "arbitrary-repository",
   "path" : "/path/to/an/existing/artifact",

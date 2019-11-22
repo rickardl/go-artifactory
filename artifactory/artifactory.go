@@ -1,9 +1,9 @@
 package artifactory
 
 import (
-	"github.com/atlassian/go-artifactory/v2/artifactory/client"
-	"github.com/atlassian/go-artifactory/v2/artifactory/v1"
-	"github.com/atlassian/go-artifactory/v2/artifactory/v2"
+	"github.com/rickardl/go-artifactory/v2/artifactory/client"
+	"github.com/rickardl/go-artifactory/v2/artifactory/v1"
+	"github.com/rickardl/go-artifactory/v2/artifactory/v2"
 
 	"net/http"
 )

@@ -6,8 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-
-	"github.com/rickardl/go-artifactory/v2/artifactory/client"
 )
 
 type SecurityService Service
@@ -41,6 +39,19 @@ func (s *SecurityService) ListUsers(ctx context.Context) (*[]UserDetails, *http.
 }
 
 // application/vnd.org.jfrog.artifactory.security.User+json
+type NewUser struct {
+	Name                     *string  `json:"name,omitempty"`                     // Optional element in create/replace queries
+	Email                    *string  `json:"email,omitempty"`                    // Mandatory element in create/replace queries, optional in "update" queries
+	Password                 *string  `json:"password,omitempty"`                 // Mandatory element in create/replace queries, optional in "update" queries
+	RetypePassword           *string  `json:"retypePassword,omitempty"`           // Mandatory element in create/replace queries, optional in "update" queries
+	Admin                    *bool    `json:"admin,omitempty"`                    // Optional element in create/replace queries; Default: false
+	ProfileUpdatable         *bool    `json:"profileUpdatable,omitempty"`         // Optional element in create/replace queries; Default: true
+	DisableUIAccess          *bool    `json:"disableUIAccess,omitempty"`          // Optional element in create/replace queries; Default: false
+	InternalPasswordDisabled *bool    `json:"internalPasswordDisabled,omitempty"` // Optional element in create/replace queries; Default: false
+	Realm                    *string  `json:"realm,omitempty"`                    // Read-only element
+	UserGroups               *[]Group `json:"groups,omitempty"`                   // Optional element in create/replace queries (requires groupName and Realm)
+}
+
 type User struct {
 	Name                     *string   `json:"name,omitempty"`                     // Optional element in create/replace queries
 	Email                    *string   `json:"email,omitempty"`                    // Mandatory element in create/replace queries, optional in "update" queries
@@ -76,30 +87,14 @@ func (s *SecurityService) GetUser(ctx context.Context, username string) (*User, 
 	return user, resp, err
 }
 
-// Get the encrypted password of the authenticated requestor
-// Since: 3.3.0
-// Security: Requires a privileged user
-func (s *SecurityService) GetEncryptedPassword(ctx context.Context) (*string, *http.Response, error) {
-	path := "/api/security/encryptedPassword"
-	req, err := s.client.NewRequest("GET", path, nil)
-	if err != nil {
-		return nil, nil, err
-	}
-	req.Header.Set("Accept", client.MediaTypePlain)
-
-	buf := new(bytes.Buffer)
-	resp, err := s.client.Do(ctx, req, buf)
-	return String(buf.String()), resp, err
-}
-
-// Creates a new user in Artifactory or replaces an existing user
+// Creates a new user in Artifactory
 // Since: 2.4.0
 // Notes: Requires Artifactory Pro
 // Missing values will be set to the default values as defined by the consumed type.
 // Security: Requires an admin user
-func (s *SecurityService) CreateOrReplaceUser(ctx context.Context, username string, user *User) (*http.Response, error) {
-	path := fmt.Sprintf("/ui/users/%s", username)
-	req, err := s.client.NewJSONEncodedRequest("PUT", path, user)
+func (s *SecurityService) CreateUser(ctx context.Context, username string, user *NewUser) (*http.Response, error) {
+	path := fmt.Sprintf("/ui/users")
+	req, err := s.client.NewJSONEncodedRequest("POST", path, user)
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +108,7 @@ func (s *SecurityService) CreateOrReplaceUser(ctx context.Context, username stri
 // Security: Requires an admin user
 func (s *SecurityService) UpdateUser(ctx context.Context, username string, user *User) (*http.Response, error) {
 	path := fmt.Sprintf("/ui/users/%s", username)
-	req, err := s.client.NewJSONEncodedRequest("POST", path, user)
+	req, err := s.client.NewJSONEncodedRequest("PUT", path, user)
 	if err != nil {
 		return nil, err
 	}

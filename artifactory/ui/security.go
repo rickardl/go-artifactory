@@ -175,13 +175,14 @@ func (s *SecurityService) GetGroup(ctx context.Context, groupName string) (*Grou
 // Notes: Requires Artifactory Pro
 // Missing values will be set to the default values as defined by the consumed type.
 // Security: Requires an admin user
-func (s *SecurityService) CreateOrReplaceGroup(ctx context.Context, groupName string, group *Group) (*http.Response, error) {
-	url := fmt.Sprintf("/ui/groups/%s", groupName)
-	req, err := s.client.NewJSONEncodedRequest("PUT", url, group)
+func (s *SecurityService) Create(ctx context.Context, group *Group) (*http.Response, error) {
+	url := fmt.Sprintf("/ui/groups")
+	req, err := s.client.NewJSONEncodedRequest("POST", url, group)
 	if err != nil {
 		return nil, err
 	}
 	return s.client.Do(ctx, req, nil)
+
 }
 
 // UpdateGroup Updates an exiting group in Artifactory with the provided group details.

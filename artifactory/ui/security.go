@@ -142,10 +142,12 @@ type Group struct {
 	AutoJoin        *bool     `json:"autoJoin,omitempty"`        // Optional element in create/replace queries; default: false (must be false if adminPrivileges is true)
 	AdminPrivileges *bool     `json:"adminPrivileges,omitempty"` // Optional element in create/replace queries; default: false
 	Realm           *string   `json:"realm,omitempty"`           // Optional element in create/replace queries
-	UsersInGroup    *[]string `json:"usersInGroup,omitempty"`    // Optional element in create/replace queries
+	UserNames       *[]string `json:"usersInGroup,omitempty"`    // Optional element in create/replace queries
 	Permissions     *[]string `json:"permissions,omitempty"`     // Optional element in create/replace queries
 	External        *bool     `json:"external,omitempty"`        // Optional element in create/replace queries
 	NewUsersDefault *bool     `json:"newUserDefault,omitempty"`  // Optional element in create/replace queries
+	RealmAttributes *string   `json:"realmAttributes,omitempty"` // Optional element in create/replace queries
+
 }
 
 func (r Group) String() string {
@@ -191,7 +193,7 @@ func (s *SecurityService) Create(ctx context.Context, group *Group) (*http.Respo
 // Security: Requires an admin user
 func (s *SecurityService) UpdateGroup(ctx context.Context, groupName string, group *Group) (*http.Response, error) {
 	path := fmt.Sprintf("/ui/groups/%s", groupName)
-	req, err := s.client.NewJSONEncodedRequest("POST", path, group)
+	req, err := s.client.NewJSONEncodedRequest("PUT", path, group)
 	if err != nil {
 		return nil, err
 	}

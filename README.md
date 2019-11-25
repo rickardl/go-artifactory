@@ -1,7 +1,7 @@
 # go-artifactory #
 go-artifactory is a Go client library for accessing the [Artifactory API](https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API)
 
-[![Build Status](https://travis-ci.org/atlassian/go-artifactory.svg?branch=master)](https://travis-ci.org/atlassian/go-artifactory)
+[![Build Status](https://travis-ci.org/rickardl/go-artifactory.svg?branch=master)](https://travis-ci.org/rickardl/go-artifactory)
 
 ## V2 Breaking Changes ##
 Due to the release of the new artifactory api this library has been significantly reworked. The import path has changed

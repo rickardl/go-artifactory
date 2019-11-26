@@ -177,7 +177,7 @@ func (s *SecurityService) GetGroup(ctx context.Context, groupName string) (*Grou
 // Notes: Requires Artifactory Pro
 // Missing values will be set to the default values as defined by the consumed type.
 // Security: Requires an admin user
-func (s *SecurityService) Create(ctx context.Context, group *Group) (*http.Response, error) {
+func (s *SecurityService) CreateGroup(ctx context.Context, group *Group) (*http.Response, error) {
 	url := fmt.Sprintf("/ui/groups")
 	req, err := s.client.NewJSONEncodedRequest("POST", url, group)
 	if err != nil {
